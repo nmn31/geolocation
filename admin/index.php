@@ -45,6 +45,11 @@ $.ajax({
       url: "allvisitors.php",
       success: function(resultData) { alert("Save Complete") ; locations = resultData  ; console.log('');
       console.log(locations);
+	  console.log('locations.length');
+	  console.log(locations.length);
+	  console.log('locations[0]');
+	  console.log(locations[0]);
+	  console.log(locations[0]);
 	  
 	     var map = new google.maps.Map(document.getElementById('map'), {
 		  zoom: 2,
