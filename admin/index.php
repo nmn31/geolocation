@@ -17,6 +17,8 @@ print_r($locations);
 ?>
 <html> 
 <head> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
   <title>Google Maps Multiple Markers</title> 
   <script src="https://maps.google.com/maps/api/js?key=AIzaSyA6bcE2rRb8B3lLE44N5sEAiOGZq2GE6Lg" 
