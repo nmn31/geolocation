@@ -41,7 +41,7 @@ include"../db.php";
 		
 		 $.ajax({
 		  type: 'POST',
-		  url: "saveloc.php",
+		  url: "admin/saveloc.php",
 		  data: { latitude: position.coords.latitude, longitude:position.coords.longitude},
 		  success: function(resultData) { 
 		   
