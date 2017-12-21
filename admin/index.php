@@ -84,7 +84,7 @@ print_r($_GET);
 	 $.ajax({
       type: 'POST',
       url: "saveloc.php",
-	  data = { name:'vname', email:'email'}
+	  data: { name:'vname', email:'email'},
       success: function(resultData) { 
 	   
 	   alert("data Complete")  ; console.log('sssssssssssssss'); console.log(resultData);
