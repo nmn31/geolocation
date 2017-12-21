@@ -1,4 +1,19 @@
 <!DOCTYPE html>
+
+<?php
+$servername = "sg2plcpnl0139.prod.sin2.secureserver.net";
+$username = "narenderthakur";
+$password = "dxdev@296";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+echo "Connected successfully";
+?>
 <html> 
 <head> 
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
@@ -32,6 +47,8 @@
 
   <script type="text/javascript">
     var locations = [
+	
+	
       ['Bondi Beach', -33.890542, 151.274856, 4],
       ['Coogee Beach', -33.923036, 151.259052, 5],
       ['Cronulla Beach', -34.028249, 151.157507, 3],
