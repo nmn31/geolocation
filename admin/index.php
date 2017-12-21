@@ -79,19 +79,20 @@ print_r($_GET);
       ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
       ['Maroubra Beach', -33.950198, 151.259302, 1]
     ];*/
-	function onload_page(){
+
 		
-		$.ajax({
+	 $.ajax({
       type: 'POST',
       url: "saveloc.php",
+	  data = {name:vname,email:email},
       success: function(resultData) { 
-	  
-	  alert("Save Complete") ;  locations = JSON.parse(resultData)  ; console.log('data');
+	   
+	   alert("data Complete")  ; console.log('sssssssssssssss'); console.log(resultData);
     
 	  }
 	  });
 		
-	}
+
 	
 	var locations;
 	$.ajax({
