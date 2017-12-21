@@ -1,6 +1,17 @@
 <!DOCTYPE html>
-<?php 
-include"../db.php";
+
+<?php
+$servername = "mysql7002.site4now.net";
+$username = "lx3krksj_narende";
+$password = "dxdev@296";
+// Create connection
+$conn = new mysqli($servername, $username, $password);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+echo "Connected successfully";
 ?>
 <html> 
 <head> 
