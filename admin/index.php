@@ -53,7 +53,7 @@ $.ajax({
 			console.log('locations.lengthloop');
           console.log(locations[i].lati);			
 		  marker = new google.maps.Marker({
-			position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+			position: new google.maps.LatLng(locations[i].lati, locations[i].longi),
 			map: map
 		  });
 
