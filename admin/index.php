@@ -2,7 +2,6 @@
 <?php 
 include"../db.php";
 
-print_r($_GET);
 
 ?>
 <html> 
@@ -86,7 +85,7 @@ print_r($_GET);
 
 	
 	var locations;
-	$.ajax({
+	$.ajax({ 
       type: 'POST',
       url: "allvisitors.php",
       success: function(resultData) { locations = JSON.parse(resultData)  ; console.log('data');
