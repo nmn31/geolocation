@@ -38,7 +38,7 @@ print_r($locations);
       ['Maroubra Beach', -33.950198, 151.259302, 1]
     ];*/
 	
- var locations = <?php print_t($locations); ?>
+ var locations = <?php print_r($locations); ?>
  
  console.log(locations);
  
