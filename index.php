@@ -26,6 +26,8 @@ include"../db.php";
       border-color: #f1f1f1;
   }
   </style>
+  <script src="https://maps.google.com/maps/api/js?key=AIzaSyA6bcE2rRb8B3lLE44N5sEAiOGZq2GE6Lg" 
+          type="text/javascript"></script>
   <script>
 	var x = document.getElementById("demo");
 	function getLocation() {
@@ -38,6 +40,9 @@ include"../db.php";
 	function showPosition(position) {
 	    x.innerHTML = "Latitude: " + position.coords.latitude + 
 	    "<br>Longitude: " + position.coords.longitude; 
+		
+		alert("Latitude: " + position.coords.latitude + 
+	    "<br>Longitude: " + position.coords.longitude; );
 	}
 	
 	window.onload = function() {
