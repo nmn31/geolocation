@@ -37,7 +37,7 @@ $.ajax({
 	  console.log(locations.length);
 	  console.log('locations[0]');
 	  console.log(locations[0]);
-	  console.log(locations[0]);
+
 	  
 	     var map = new google.maps.Map(document.getElementById('map'), {
 		  zoom: 2,
@@ -49,7 +49,9 @@ $.ajax({
 
 		var marker, i;
 
-		for (i = 0; i < locations.length; i++) {  
+		for (i = 0; i < locations.length; i++) {
+			console.log('locations.lengthloop');
+          console.log(locations[i]);			
 		  marker = new google.maps.Marker({
 			position: new google.maps.LatLng(locations[i][1], locations[i][2]),
 			map: map
