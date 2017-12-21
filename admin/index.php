@@ -43,9 +43,10 @@ var locations1;
 $.ajax({
       type: 'POST',
       url: "allvisitors.php",
-      success: function(resultData) { alert("Save Complete") ; locations1 = resultData}
+      success: function(resultData) { alert("Save Complete") ; locations1 = resultData  ; console.log('');
+  console.log(locations1);}
 });
-  console.log(locations1);
+  console.log('dd');
   console.log(locations1);
 
     var map = new google.maps.Map(document.getElementById('map'), {
