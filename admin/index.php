@@ -40,7 +40,7 @@ $.ajax({
 
 	  
 	     var map = new google.maps.Map(document.getElementById('map'), {
-		  zoom: 2,
+		  zoom: 5,
 		  center: new google.maps.LatLng(-33.92, 151.25),
 		  mapTypeId: google.maps.MapTypeId.ROADMAP
 		});
@@ -59,7 +59,7 @@ $.ajax({
 
 		  google.maps.event.addListener(marker, 'click', (function(marker, i) {
 			return function() {
-			  infowindow.setContent(locations[i][0]);
+			  infowindow.setContent('Bondi Beach');
 			  infowindow.open(map, marker);
 			}
 		  })(marker, i));
