@@ -3,7 +3,7 @@
 <?php
 $servername = "sg2plcpnl0139.prod.sin2.secureserver.net";
 $username = "narenderthakur";
-$password = "dxdev@296";
+$password = "k_%Mkk{9L]mA";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password);
