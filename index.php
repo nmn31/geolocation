@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
 <?php
-$servername = "sg3plcpnl0060.prod.sin3.secureserver.net:2083";
-$username = "narenderthakur";
-$password = "k_%Mkk{9L]mA";
+$servername = "mysql7002.site4now.net";
+$username = "lx3krksj_narende";
+$password = "dxdev@296";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password);
