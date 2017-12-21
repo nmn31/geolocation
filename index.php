@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <?php
-$servername = "sg2plcpnl0139.prod.sin2.secureserver.net";
+$servername = "vatsholidays.com";
 $username = "narenderthakur";
 $password = "k_%Mkk{9L]mA";
 
