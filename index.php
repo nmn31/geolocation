@@ -1,26 +1,31 @@
 <!DOCTYPE html>
-
-<?php
-$servername = "mysql7002.site4now.net";
-$username = "lx3krksj_narende";
-$password = "dxdev@296";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-echo "Connected successfully";
+<?php 
+include"../db.php";
 ?>
-<html> 
-<head> 
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
-  <title>Google Maps Multiple Markers</title> 
-  <script src="https://maps.google.com/maps/api/js?key=AIzaSyA6bcE2rRb8B3lLE44N5sEAiOGZq2GE6Lg" 
-          type="text/javascript"></script>
-          
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>Bootstrap Theme The Band</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  .container {
+      padding: 80px 120px;
+  }
+  .person {
+      border: 10px solid transparent;
+      margin-bottom: 25px;
+      width: 80%;
+      height: 80%;
+      opacity: 0.7;
+  }
+  .person:hover {
+      border-color: #f1f1f1;
+  }
+  </style>
   <script>
 	var x = document.getElementById("demo");
 	function getLocation() {
@@ -39,46 +44,96 @@ echo "Connected successfully";
 		  getLocation();
 		};
   </script>
-</head> 
+</head>
 <body>
 
-<H1>Dummy visitors as red marker </H1>
-  <div id="map" style="width: 500px; height: 400px;"></div>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
 
-  <script type="text/javascript">
-    var locations = [
-	
-	
-      ['Bondi Beach', -33.890542, 151.274856, 4],
-      ['Coogee Beach', -33.923036, 151.259052, 5],
-      ['Cronulla Beach', -34.028249, 151.157507, 3],
-      ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
-      ['Maroubra Beach', -33.950198, 151.259302, 1]
-    ];
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img src="ny.jpg" alt="New York" width="1200" height="700">
+        <div class="carousel-caption">
+          <h3>New York</h3>
+          <p>The atmosphere in New York is lorem ipsum.</p>
+        </div>      
+      </div>
 
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 10,
-      center: new google.maps.LatLng(-33.92, 151.25),
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    });
+      <div class="item">
+        <img src="chicago.jpg" alt="Chicago" width="1200" height="700">
+        <div class="carousel-caption">
+          <h3>Chicago</h3>
+          <p>Thank you, Chicago - A night we won't forget.</p>
+        </div>      
+      </div>
+    
+      <div class="item">
+        <img src="la.jpg" alt="Los Angeles" width="1200" height="700">
+        <div class="carousel-caption">
+          <h3>LA</h3>
+          <p>Even though the traffic was a mess, we had the best time playing at Venice Beach!</p>
+        </div>      
+      </div>
+    </div>
 
-    var infowindow = new google.maps.InfoWindow();
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+</div>
 
-    var marker, i;
+<div class="container text-center">
+  <h3>THE BAND</h3>
+  <p><em>We love music!</em></p>
+  <p>We have created a fictional band website. Lorem ipsum..</p>
+  <br>
+  <div class="row">
+    <div class="col-sm-4">
+      <p class="text-center"><strong>Name</strong></p><br>
+      <a href="#demo" data-toggle="collapse">
+        <img src="bandmember.jpg" class="img-circle person" alt="Random Name" width="255" height="255">
+      </a>
+      <div id="demo" class="collapse">
+        <p>Guitarist and Lead Vocalist</p>
+        <p>Loves long walks on the beach</p>
+        <p>Member since 1988</p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <p class="text-center"><strong>Name</strong></p><br>
+      <a href="#demo2" data-toggle="collapse">
+        <img src="bandmember.jpg" class="img-circle person" alt="Random Name" width="255" height="255">
+      </a>
+      <div id="demo2" class="collapse">
+        <p>Drummer</p>
+        <p>Loves drummin'</p>
+        <p>Member since 1988</p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <p class="text-center"><strong>Name</strong></p><br>
+      <a href="#demo3" data-toggle="collapse">
+        <img src="bandmember.jpg" class="img-circle person" alt="Random Name" width="255" height="255">
+      </a>
+      <div id="demo3" class="collapse">
+        <p>Bass player</p>
+        <p>Loves math</p>
+        <p>Member since 2005</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-    for (i = 0; i < locations.length; i++) {  
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-        map: map
-      });
-
-      google.maps.event.addListener(marker, 'click', (function(marker, i) {
-        return function() {
-          infowindow.setContent(locations[i][0]);
-          infowindow.open(map, marker);
-        }
-      })(marker, i));
-    }
-  </script>
 </body>
 </html>
