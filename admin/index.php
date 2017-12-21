@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <?php 
 include"../db.php";
+
+$sql = "SELECT * FROM geo";
+$result = $conn->query($sql);
+echo "<pre>";
+print_r($result);
 ?>
 <html> 
 <head> 
