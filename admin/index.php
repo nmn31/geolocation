@@ -2,6 +2,8 @@
 <?php 
 include"../db.php";
 
+print_r($_GET);
+
 ?>
 <html> 
 <head> 
@@ -27,8 +29,8 @@ include"../db.php";
       ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
       ['Maroubra Beach', -33.950198, 151.259302, 1]
     ];*/
-var locations;
-$.ajax({
+	var locations;
+	$.ajax({
       type: 'POST',
       url: "allvisitors.php",
       success: function(resultData) { alert("Save Complete") ;  locations = JSON.parse(resultData)  ; console.log('data');
@@ -37,9 +39,7 @@ $.ajax({
 	  console.log(locations.length);
 	  console.log('locations[0]');
 	  console.log(locations[0]);
-
-	  
-	     var map = new google.maps.Map(document.getElementById('map'), {
+	  var map = new google.maps.Map(document.getElementById('map'), {
 		  zoom: 5,
 		  center: new google.maps.LatLng(-33.92, 151.25),
 		  mapTypeId: google.maps.MapTypeId.ROADMAP
