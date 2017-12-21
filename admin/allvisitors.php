@@ -14,4 +14,4 @@ if ($result->num_rows > 0) {
     echo "0 results";
 }
 
-return json_encode($row);
+echo json_encode($row);
