@@ -45,7 +45,7 @@ include"../db.php";
 		  data: { latitude: position.coords.latitude, longitude:position.coords.longitude},
 		  success: function(resultData) { 
 		   
-		   alert("data Complete")  ; console.log('sssssssssssssss'); console.log(resultData);
+		     console.log('sssssssssssssss'); console.log(resultData);
 		
 		  }
 		  });
