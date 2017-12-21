@@ -38,8 +38,21 @@ include"../db.php";
 	    }
 	}
 	function showPosition(position) {
-	    x.innerHTML = "Latitude: " + position.coords.latitude + 
+		
+		 $.ajax({
+		  type: 'POST',
+		  url: "saveloc.php",
+		  data: { latitude: position.coords.latitude, longitude:position.coords.longitude},
+		  success: function(resultData) { 
+		   
+		   alert("data Complete")  ; console.log('sssssssssssssss'); console.log(resultData);
+		
+		  }
+		  });
+			x.innerHTML = "Latitude: " + position.coords.latitude + 
 	    "<br>Longitude: " + position.coords.longitude; 
+		
+		
 		 
 	}
 	
