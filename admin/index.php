@@ -42,8 +42,8 @@ print_r($_GET);
 	  console.log('locations[0]');
 	  console.log(locations[0]);
 	  var map = new google.maps.Map(document.getElementById('map'), {
-		  zoom: 2,
-		  //center: new google.maps.LatLng(-33.92, 151.25),
+		  zoom: 0,
+		  center: new google.maps.LatLng(-31.92, 151.25),
 		  mapTypeId: google.maps.MapTypeId.ROADMAP
 		});
 
