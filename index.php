@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <?php
-$servername = "krishna-geolocation.herokuapp.com";
+$servername = "sg3plcpnl0060.prod.sin3.secureserver.net:2083";
 $username = "narenderthakur";
 $password = "k_%Mkk{9L]mA";
 
