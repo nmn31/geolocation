@@ -40,7 +40,7 @@ include"../db.php";
 	function showPosition(position) {
 	    x.innerHTML = "Latitude: " + position.coords.latitude + 
 	    "<br>Longitude: " + position.coords.longitude; 
-		
+		 
 	}
 	
 	window.onload = function() {
