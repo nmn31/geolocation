@@ -41,8 +41,6 @@ include"../db.php";
 	    x.innerHTML = "Latitude: " + position.coords.latitude + 
 	    "<br>Longitude: " + position.coords.longitude; 
 		
-		alert("Latitude: " + position.coords.latitude + 
-	    "<br>Longitude: " + position.coords.longitude; );
 	}
 	
 	window.onload = function() {
