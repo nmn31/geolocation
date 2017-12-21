@@ -20,8 +20,10 @@ print_r($_GET);
 
 <H1>Dummy visitors as red marker </H1>
   <div id="map" style="width: 500px; height: 400px;"></div>
+<?php if(count($_GET)>0 ) { ?>
 
-  <script type="text/javascript">
+
+<script type="text/javascript">
     /*var locations = [
 	  ['Bondi Beach', -33.890542, 151.274856, 4],
       ['Coogee Beach', -33.923036, 151.259052, 5],
@@ -66,8 +68,77 @@ print_r($_GET);
 		}
 	  }
 });
+</script>
+<?php } else{ ?>
+	
+	<script type="text/javascript">
+    /*var locations = [
+	  ['Bondi Beach', -33.890542, 151.274856, 4],
+      ['Coogee Beach', -33.923036, 151.259052, 5],
+      ['Cronulla Beach', -34.028249, 151.157507, 3],
+      ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+      ['Maroubra Beach', -33.950198, 151.259302, 1]
+    ];*/
+	function onload_page(){
+		
+		$.ajax({
+      type: 'POST',
+      url: "saveloc.php",
+      success: function(resultData) { 
+	  
+	  alert("Save Complete") ;  locations = JSON.parse(resultData)  ; console.log('data');
+    
+	  }
+	  });
+		
+	}
+	
+	var locations;
+	$.ajax({
+      type: 'POST',
+      url: "allvisitors.php",
+      success: function(resultData) { alert("Save Complete") ;  locations = JSON.parse(resultData)  ; console.log('data');
+      console.log(locations);
+	  console.log('locations.length');
+	  console.log(locations.length);
+	  console.log('locations[0]');
+	  console.log(locations[0]);
+	  var map = new google.maps.Map(document.getElementById('map'), {
+		  zoom: 5,
+		  center: new google.maps.LatLng(-33.92, 151.25),
+		  mapTypeId: google.maps.MapTypeId.ROADMAP
+		});
+
+		var infowindow = new google.maps.InfoWindow();
+
+		var marker, i;
+
+		for (i = 0; i < locations.length; i++) {
+			console.log('locations.lengthloop');
+          console.log(locations[i].lati);			
+		  marker = new google.maps.Marker({
+			position: new google.maps.LatLng(locations[i].lati, locations[i].longi),
+			map: map
+		  });
+
+		  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+			return function() {
+			  //infowindow.setContent('Bondi Beach');
+			  infowindow.open(map, marker);
+			}
+		  })(marker, i));
+		}
+	  }
+});
   
  
   </script>
+	
+<?php
+
+
+}
+?>
+  
 </body>
 </html>
