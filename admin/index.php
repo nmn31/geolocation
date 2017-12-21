@@ -31,7 +31,7 @@ var locations;
 $.ajax({
       type: 'POST',
       url: "allvisitors.php",
-      success: function(resultData) { alert("Save Complete") ; locations = resultData  ; console.log('data');
+      success: function(resultData) { alert("Save Complete") ;  locations = JSON.parse(resultData)  ; console.log('data');
       console.log(locations);
 	  console.log('locations.length');
 	  console.log(locations.length);
