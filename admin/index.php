@@ -1,17 +1,6 @@
 <!DOCTYPE html>
-
-<?php
-$servername = "mysql7002.site4now.net";
-$username = "lx3krksj_narende";
-$password = "dxdev@296";
-// Create connection
-$conn = new mysqli($servername, $username, $password);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-echo "Connected successfully";
+<?php 
+include"../db.php";
 ?>
 <html> 
 <head> 
@@ -29,9 +18,7 @@ echo "Connected successfully";
 
   <script type="text/javascript">
     var locations = [
-	
-	
-      ['Bondi Beach', -33.890542, 151.274856, 4],
+	  ['Bondi Beach', -33.890542, 151.274856, 4],
       ['Coogee Beach', -33.923036, 151.259052, 5],
       ['Cronulla Beach', -34.028249, 151.157507, 3],
       ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
@@ -39,7 +26,7 @@ echo "Connected successfully";
     ];
 
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 10,
+      zoom: 2,
       center: new google.maps.LatLng(-33.92, 151.25),
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
