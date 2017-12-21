@@ -39,14 +39,14 @@ print_r($locations);
       ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
       ['Maroubra Beach', -33.950198, 151.259302, 1]
     ];
-
+var locations1;
 $.ajax({
       type: 'POST',
       url: "allvisitors.php",
-      success: function(resultData) { alert("Save Complete") ; console.log(resultData)}
+      success: function(resultData) { alert("Save Complete") ; locations1 = resultData}
 });
-  console.log(locations);
-  console.log(locations);
+  console.log(locations1);
+  console.log(locations1);
 
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 2,
