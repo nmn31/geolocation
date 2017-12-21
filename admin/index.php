@@ -39,6 +39,10 @@ print_r($locations);
     ];*/
 	
  var locations = <?php print_t($locations); ?>
+ 
+ console.log(locations);
+ 
+ console.log(locations);
 
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 2,
