@@ -2,7 +2,11 @@
     "extra": {
         "heroku": {
             "compile": [
-                "chmod 777 /lhc_web"
+                "chmod 777 /lhc_web", "chmod 777 /lhc_web/cacheconfig", "chmod 777 /lhc_web/cacheconfig/templateCache.cache.php", "chmod 777 /lhc_web", "chmod 777 /lhc_web"
+
+
+
+
             ]
         }
     }
