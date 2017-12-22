@@ -1,0 +1,9 @@
+{
+    "extra": {
+        "heroku": {
+            "compile": [
+                "chmod 777 /app/app/cache"
+            ]
+        }
+    }
+}
