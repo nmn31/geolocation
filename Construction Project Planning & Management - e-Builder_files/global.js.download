@@ -1,0 +1,313 @@
+﻿
+
+/**
+ * Console.log cross-browser for no IE conflict 
+ * and it also prevents it from disply on specific domains (e.g. production)
+ */
+function consolelog(msg) {
+    var getDomainName = window.location.hostname;
+    var domains = ["e-builder.net"]; // List domains separate by comma
+    var consoleAllowed = true;
+    var alertFallback = true;
+
+    for (var i in domains) {
+        if (domains[i] == getDomainName) {
+            consoleAllowed = false;
+        }
+    }
+
+    if (consoleAllowed) {
+        if (typeof console === "undefined" || typeof console.log === "undefined") {
+            //
+        } else {
+            console.log(msg);
+        }
+    }
+}
+
+/*
+ * Capture PPC Adwords URL parameters and save it in cookie
+ * */
+function getUrlParameter(sParam) {
+	var sPageURL = window.location.search.substring(1);
+	var sURLVariables = sPageURL.split('&');
+	
+	for (var i = 0; i < sURLVariables.length; i++) {
+		var sParameterName = sURLVariables[i].split('=');
+		
+		if (sParameterName[0] == sParam) {
+			
+			return sParameterName[1];
+		}
+	}
+	
+	// return an empty value instead of undefined if we don't end up with a match
+	return '';
+}
+
+// grab the cookie parameters and set them (if applicable)
+var domainEnvironment = window.location.hostname; // e-builder.net, wp.battlemedialab.com
+
+if (getUrlParameter('utm_campaign').length && jQuery.cookie('Marketo_CampaignID__c') === undefined) {
+	jQuery.cookie('Marketo_CampaignID__c', getUrlParameter('utm_campaign'), { path: '\/', domain: domainEnvironment });
+}
+
+if (getUrlParameter('utm_medium').length && jQuery.cookie('Marketo_Campaign_Medium__c') === undefined) {
+	jQuery.cookie('Marketo_Campaign_Medium__c', getUrlParameter('utm_medium'), { path: '\/', domain: domainEnvironment });
+}
+
+if (getUrlParameter('utm_source').length && jQuery.cookie('Marketo_Campaign_Source__c') === undefined) {
+	jQuery.cookie('Marketo_Campaign_Source__c', getUrlParameter('utm_source'), { path: '\/', domain: domainEnvironment });
+}
+
+if (getUrlParameter('utm_term').length && jQuery.cookie('Marketo_Campaign_Term__c') === undefined) {
+	jQuery.cookie('Marketo_Campaign_Term__c', getUrlParameter('utm_term'), { path: '\/', domain: domainEnvironment });
+}
+
+// windowLoad
+(function($){
+    $(window).load(function() {
+        // if the Marketo cookie exists, that means this user has filled out this form before and we need to pre-fill it for them
+        if ($.cookie('_mkto_trk') != null) {
+            $.ajax({
+                data: {
+                    'cookie': encodeURIComponent($.cookie('_mkto_trk')),
+                    'fields': 'annual_capital_expenditure__c,company,email,firstName,lastName,marketo_current_tools_used__c,marketo_key_challenge__c,marketo_type_of_organization__c,phone,state'
+                },
+                
+                cache: false,
+                timeout: 5000,
+                type: 'GET',
+                url: '/sites/all/themes/ebuilder/includes/marketo-pre-fill.php',
+                
+                success: function(response) {
+                    // variables
+                    var mktoLead = $.parseJSON(response);
+                    var mktoLeadFields = mktoLead.result[0];
+                    
+                    // if we ever run into an edge case where the Marketo cookie gets out-of-sync and returns an empty JSON object, we need to stop here and don't try pre-filling
+                    if (mktoLeadFields) {
+                        MktoForms2.whenReady(function(form) {                    
+                            var prefillFields = {
+                                "Annual_Capital_Expenditure__c": mktoLeadFields.Annual_Capital_Expenditure__c,
+                                "Company": mktoLeadFields.company,
+                                "Email": mktoLeadFields.email,
+                                "FirstName": mktoLeadFields.firstName,
+                                "LastName": mktoLeadFields.lastName,
+                                "Marketo_Current_Tools_Used__c": mktoLeadFields.Marketo_Current_Tools_Used__c,
+                                "Marketo_Key_Challenge__c": mktoLeadFields.Marketo_Key_Challenge__c,
+                                "Marketo_Type_of_Organization__c": mktoLeadFields.Marketo_Type_of_Organization__c,
+                                "Phone": mktoLeadFields.phone,
+                                "State": mktoLeadFields.state
+                            };
+                            
+                            form.vals(prefillFields);
+                        });
+                    }
+                },
+                
+                error: function(xmlhttprequest, textstatus, message) {
+                    consolelog(xmlhttprequest, textstatus, message);
+                }
+            });
+        }
+    });
+})(jQuery);
+
+/**
+ * When DOM is ready 
+ */
+jQuery(document).ready(function($) {
+	
+	/**	 
+	 * Capture PPC cookies and place it in Marketo form
+	 */
+
+	// Adds a callback that will be called exactly once for each form on the page that becomes "ready".
+	MktoForms2.whenReady(function (form) {
+		
+		// Add PPC values to hidden PPC fields
+		$("input[name='Marketo_CampaignID__c']").val(decodeURIComponent($.cookie('Marketo_CampaignID__c')));	
+		$("input[name='Marketo_Campaign_Medium__c']").val(decodeURIComponent($.cookie('Marketo_Campaign_Medium__c')));
+		$("input[name='Marketo_Campaign_Source__c']").val(decodeURIComponent($.cookie('Marketo_Campaign_Source__c')));
+		$("input[name='Marketo_Campaign_Term__c']").val(decodeURIComponent($.cookie('Marketo_Campaign_Term__c')));
+		
+	});
+	
+	/**
+	 * Header Search 
+	 */	 
+	// Desktop
+	$(".region-header-bar .search-open").click(function(e){
+		$(".region-header-bar").addClass("active-search");
+		$mainWrapper = ".menu-device-desktop";
+		$(".region-header-bar .search-open").fadeOut("fast", function() {
+			$(".region-header-bar .block-search form").fadeIn("fast", function() {
+		 		$(".region-header-bar .block-search form input.form-text").css("width", "255px");
+		 		$(".region-header-bar .block-search form input.form-text").css("padding-left", "35px");
+		 	});
+		 	
+		});
+		 
+		return false;
+	});	 
+	
+	
+	/**
+	 * Header main menu
+	 */	
+	// Desktop overlay effect on over state
+	$('.region-main-navigation.skin1 .block-menu.block-system li').mouseover(function() {
+		$('.region-main-navigation').addClass('overlay-visible');
+	}).mouseout(function() {
+		$('.region-main-navigation').removeClass('overlay-visible');
+	});
+	
+	// Desktop sub menu
+	$('.region-main-navigation .block-menu.block-system li.expanded').mouseover(function() {
+		$('.region-main-navigation').addClass('active-subbkg');
+	}).mouseout(function() {
+		$('.region-main-navigation').removeClass('active-subbkg');
+	});
+    
+    // if the user is on a tablet-class device and is using the desktop menu, we don't want them to have to tap the submenus twice to get to the content
+    $(".region-main-navigation .block-menu.block-system li.expanded .menu li").on('click touchend', function(event) {
+        // variables
+        var $menuTouchedItem = $(this);
+        
+        if ($("html").hasClass('ua-ios')) {
+            window.location.href = $menuTouchedItem.find('a').attr('href');
+        }
+    });
+    	
+	
+	/**
+	 * Header mobile menu sandwich open/close
+	 */
+	$('.region-main-navigation .mobile-open').click(function(e) {
+		if ($(e.currentTarget).hasClass('menu-opened')){
+            $("html").removeClass('mobile-menu-open');
+            $("body").removeClass('mobile-menu-open');
+            
+			$(e.currentTarget).removeClass('menu-opened');
+			$('#block-menu-menu-mobile').css('height', '').fadeOut('fast');
+		} else {
+            $("html").addClass('mobile-menu-open');
+            $("body").addClass('mobile-menu-open');
+            $(e.currentTarget).addClass('menu-opened');
+            
+            if ((window.innerHeight < window.innerWidth) && $("html").hasClass('ua-ios') && $("html").hasClass('ua-safari')) {
+                $('#block-menu-menu-mobile').css('height', $(window).height() - 140);
+            } else {
+                $('#block-menu-menu-mobile').css('height', $(window).height() - 55);
+            }
+            
+			$('#block-menu-menu-mobile').fadeIn('fast');
+		}
+		
+		return false;
+	});
+    
+    window.addEventListener("orientationchange", function() {
+        if ($('.region-main-navigation .mobile-open').hasClass('menu-opened')) {
+            if ((window.orientation == 90 || window.orientation == -90) && $("html").hasClass('ua-ios') && $("html").hasClass('ua-safari')) {
+                $('#block-menu-menu-mobile').css('height', $(window).height() - 140);
+            } else {
+                $('#block-menu-menu-mobile').css('height', $(window).height() - 55);
+            }
+        }
+    });
+    
+    window.addEventListener("resize", function() {
+        if ($('.region-main-navigation .mobile-open').hasClass('menu-opened')) {
+            if ((window.orientation == 90 || window.orientation == -90) && $("html").hasClass('ua-ios') && $("html").hasClass('ua-safari')) {
+                $('#block-menu-menu-mobile').css('height', $(window).height() - 140);
+            } else {
+                $('#block-menu-menu-mobile').css('height', $(window).height() - 55);
+            }
+        }
+    }, false);
+
+ 
+	/**
+	 * Header mobile menu accordion items
+	 */
+	$('.region-main-navigation #block-menu-menu-mobile li.expanded > a').click(function(e) {
+		if ($(this).closest('li').hasClass('submenu-opened')) {
+			$(this).closest('li').removeClass('submenu-opened')
+			$(this).closest('li').find('.menu').slideUp('fast');			
+		} else {
+			$(this).closest('li').addClass('submenu-opened')
+			$('#block-menu-menu-mobile .expanded .menu').slideUp('fast');
+			$(this).closest('li').find('.menu').slideDown('fast');
+		}
+		
+		return false;
+	});
+	
+	/**
+	 * Animate header on scroll
+	 */	 
+	function initHeaderAnimateScroll() {
+	    var mobileMenu = 820;
+	    
+	    window.addEventListener('scroll', function(e){
+	        
+	        // Animate header on scroll
+	        var distanceY = window.pageYOffset || document.documentElement.scrollTop,
+	            shrinkOn = 180;
+	            
+	        // Make sure it only happens above mobile menu breakpoint
+	        if (window.innerWidth > mobileMenu && !$("body").hasClass('node-type-e-builder-nenterprise')) {
+		        
+		        // Change main menu style
+		        if (distanceY > shrinkOn) {
+		            $(".region-main-navigation").removeClass('skin1');
+		            $(".region-main-navigation").addClass('skin2');
+		        } else {
+		            if ($(".region-main-navigation").hasClass('skin2')) {
+		                $(".region-main-navigation").addClass('skin1');
+		            	$(".region-main-navigation").removeClass('skin2');
+		            }
+		        }
+	        }
+	    });
+	    
+	    window.addEventListener('resize', function(e){
+	    	if (window.innerWidth <= mobileMenu) {
+	    		// Make sure skin2 class is removed at mobile menu breakpoint
+	        	$(".region-main-navigation").addClass('skin1');
+		        $(".region-main-navigation").removeClass('skin2');	
+	    	} else {
+	    		// Otherwise remove mobile menu if it was opened
+                $("html").removeClass('mobile-menu-open');
+                $("body").removeClass('mobile-menu-open');
+                
+	    		$('.region-main-navigation .mobile-open').removeClass('menu-opened');
+	    		$('#block-menu-menu-mobile').fadeOut('fast');
+	    	}
+	    });
+	}
+	initHeaderAnimateScroll(); 
+	
+	/**
+	 * Form: Request demo
+	 */	
+	
+	$('.section-callout .open-form').click(function(e){
+		$(this).fadeOut("fast", function(){
+			$('.section-callout .form-content').slideDown('slow');
+		});
+		return false;
+	});
+	
+	/**
+	 * Footer newsletter Marketo form
+	 */	
+	 
+	$(".form-subscribe .form-actions button").click(function(){
+		$(".region-footer-right .form-subscribe form .mktoButtonRow button[type='submit']").click();
+		return false;
+	});
+	
+});
